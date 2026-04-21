@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI-CD Pipeline
 
 on:
   push:
@@ -6,12 +6,17 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run app
-        run: node app.js
+      - name: Deploy to VM
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 20.243.209.127
+          username: mujju
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/mujju/app
+            git pull
+            echo "Deployed successfully 🚀"
