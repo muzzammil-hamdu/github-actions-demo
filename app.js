@@ -1,2 +1,10 @@
-console.log("Hello from GitHub Actions 🚀");
-New change
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.write("Hello from Azure VM 🚀");
+  res.end();
+});
+
+server.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
